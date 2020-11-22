@@ -1,0 +1,25 @@
+# Gradle
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+parameters:
+  name: ''
+  pool: ''
+  platform: ''
+  appPackaging: ''
+  sign: false
+
+jobs:
+- job: ${{ parameters.name }}
+  pool: ${{ parameters.pool }}
+  steps:
+    - task: Gradle@2
+      inputs:
+        gradleWrapperFile: 'gradlew'
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.11'
+        jdkArchitectureOption: 'x64'
+        publishJUnitResults: false
+        tasks: 'dist'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: '$(System.DefaultWorkingDirectory)/build/distributions/${{ parameters.appPackaging }}-${{ parameters.platform }}.zip'

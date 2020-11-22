@@ -1,0 +1,33 @@
+trigger:
+  - master
+
+variables:
+  appPackaging: verche
+
+jobs:
+  # Linux job
+  - template: src/main/pipeline/build-job.yml
+    parameters:
+      name: Linux
+      platform: linux
+      appPackaging: $(appPackaging)
+      pool:
+        vmImage: 'ubuntu-latest'
+
+  # Mac OS job
+  - template: src/main/pipeline/build-job.yml
+    parameters:
+      name: MacOS
+      platform: mac
+      appPackaging: $(appPackaging)
+      pool:
+        vmImage: 'macOS-latest'
+
+  # Windows job
+  - template: src/main/pipeline/build-job.yml
+    parameters:
+      name: Windows
+      platform: win
+      appPackaging: $(appPackaging)
+      pool:
+        vmImage: 'windows-latest'
