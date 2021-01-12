@@ -15,6 +15,6 @@ module verche {
 
     exports verche;
 
-    opens verche.model to javafx.base;
+    opens verche.model to javafx.base, com.fasterxml.jackson.databind;
     opens verche.service to com.fasterxml.jackson.databind;
 }

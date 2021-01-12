@@ -5,6 +5,9 @@ public class ModPojo {
     private String name;
     private String version;
 
+    public ModPojo() {
+    }
+
     public ModPojo(String name, String version) {
         this.name = name;
         this.version = version;
